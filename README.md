@@ -1,4 +1,4 @@
-# @fleetbase/fleetops-models
+# @fleetbase/fleetops-data
 
 [Short description of the addon.]
 
@@ -13,7 +13,7 @@
 ## Installation
 
 ```
-ember install @fleetbase/fleetops-models
+ember install @fleetbase/fleetops-data
 ```
 
 

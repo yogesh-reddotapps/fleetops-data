@@ -1,5 +1,5 @@
 {
-  "name": "@fleetbase/fleetops-models",
+  "name": "@fleetbase/fleetops-data",
   "version": "0.0.0",
   "description": "The default blueprint for ember-cli addons.",
   "keywords": [
@@ -26,10 +26,12 @@
     "test:ember-compatibility": "ember try:each"
   },
   "dependencies": {
+    "date-fns": "^2.29.3",
     "ember-cli-babel": "^7.26.11",
     "ember-cli-htmlbars": "^6.1.0"
   },
   "devDependencies": {
+    "@fleetbase/ember-core": "link:../ember-core",
     "@ember/optional-features": "^2.0.0",
     "@ember/test-helpers": "^2.8.1",
     "@embroider/test-setup": "^1.8.3",
@@ -49,6 +51,7 @@
     "ember-qunit": "^5.1.5",
     "ember-resolver": "^8.0.3",
     "ember-source": "~4.6.0",
+    "ember-data": "~4.6.0",
     "ember-source-channel-url": "^3.0.0",
     "ember-template-lint": "^4.10.1",
     "ember-try": "^2.0.0",
