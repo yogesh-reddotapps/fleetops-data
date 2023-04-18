@@ -73,14 +73,12 @@ export default class PlaceModel extends Model {
       vendor_name: this.vendor_name,
       location: this.location,
       meta: this.meta,
+      created_at: this.created_at,
+      updated_at: this.updated_at,
     };
   }
 
   /** @computed */
-  get place() {
-    return this;
-  }
-
   @computed('location') get longitude() {
     return get(this.location, 'coordinates.0');
   }

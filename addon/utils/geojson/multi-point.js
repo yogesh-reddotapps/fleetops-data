@@ -4,46 +4,46 @@ import { assign } from '@ember/polyfills';
 import { isArray } from '@ember/array';
 
 export default class MultiPoint extends GeoJson {
-    constructor(input) {
-        super();
+  constructor(input) {
+    super();
 
-        if (input && input.type === 'MultiPolygon' && input.coordinates) {
-            assign(this, input);
-        } else if (isArray(input)) {
-            this.coordinates = input;
-        } else {
-            throw 'GeoJSON: invalid input for new MultiPolygon';
-        }
-
-        this.type = 'MultiPolygon';
+    if (input && input.type === 'MultiPolygon' && input.coordinates) {
+      assign(this, input);
+    } else if (isArray(input)) {
+      this.coordinates = input;
+    } else {
+      throw 'GeoJSON: invalid input for new MultiPolygon';
     }
 
-    forEach(func) {
-        for (var i = 0; i < this.coordinates.length; i++) {
-            func.apply(this, [this.coordinates[i], i, this.coordinates]);
-        }
-    }
+    this.type = 'MultiPolygon';
+  }
 
-    addPoint(point) {
-        this.coordinates.push(point);
-        return this;
+  forEach(func) {
+    for (var i = 0; i < this.coordinates.length; i++) {
+      func.apply(this, [this.coordinates[i], i, this.coordinates]);
     }
+  }
 
-    insertPoint(point, index) {
-        this.coordinates.splice(index, 0, point);
-        return this;
-    }
+  addPoint(point) {
+    this.coordinates.push(point);
+    return this;
+  }
 
-    removePoint(remove) {
-        if (typeof remove === 'number') {
-            this.coordinates.splice(remove, 1);
-        } else {
-            this.coordinates.splice(this.coordinates.indexOf(remove), 1);
-        }
-        return this;
-    }
+  insertPoint(point, index) {
+    this.coordinates.splice(index, 0, point);
+    return this;
+  }
 
-    get(i) {
-        return new Point(this.coordinates[i]);
+  removePoint(remove) {
+    if (typeof remove === 'number') {
+      this.coordinates.splice(remove, 1);
+    } else {
+      this.coordinates.splice(this.coordinates.indexOf(remove), 1);
     }
+    return this;
+  }
+
+  get(i) {
+    return new Point(this.coordinates[i]);
+  }
 }
