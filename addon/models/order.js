@@ -3,6 +3,7 @@ import { tracked } from '@glimmer/tracking';
 import { computed, setProperties, set } from '@ember/object';
 import { notEmpty, not, bool, alias, equal } from '@ember/object/computed';
 import { isArray } from '@ember/array';
+import { isBlank } from '@ember/utils';
 import { getOwner } from '@ember/application';
 import { capitalize, camelize } from '@ember/string';
 import { format as formatDate, formatDistanceToNow, isValid as isValidDate } from 'date-fns';
@@ -405,6 +406,10 @@ export default class OrderModel extends Model {
         const owner = getOwner(this);
         const store = owner.lookup(`service:store`);
 
+        if (!this.payload_uuid || !isBlank(this.payload)) {
+            return;
+        }
+
         return store
             .queryRecord('payload', {
                 uuid: this.payload_uuid,
@@ -414,9 +419,6 @@ export default class OrderModel extends Model {
             .then((payload) => {
                 this.set('payload', payload);
                 return payload;
-            })
-            .catch(() => {
-                resolve(null);
             });
     }
 
@@ -424,74 +426,75 @@ export default class OrderModel extends Model {
         const owner = getOwner(this);
         const store = owner.lookup(`service:store`);
 
-        return store
-            .findRecord(`customer-${this.customer_type}`, this.customer_uuid)
-            .then((customer) => {
-                this.set('customer', customer);
-                return customer;
-            })
-            .catch(() => {
-                resolve(null);
-            });
+        if (!this.customer_uuid || !isBlank(this.customer)) {
+            return;
+        }
+
+        return store.findRecord(`customer-${this.customer_type}`, this.customer_uuid).then((customer) => {
+            this.set('customer', customer);
+            return customer;
+        });
     }
 
     async loadOrderConfig() {
         const owner = getOwner(this);
         const fetch = owner.lookup(`service:fetch`);
 
+        if (!isBlank(this.order_config)) {
+            return;
+        }
+
         return fetch
             .get('fleet-ops/order-configs/get-installed', { key: this.type ?? 'default', single: true }, { normalizeToEmberData: true, normalizeModelType: 'order-config' })
             .then((orderConfig) => {
                 this.set('order_config', orderConfig);
                 return orderConfig;
-            })
-            .catch(reject);
+            });
     }
 
     async loadDriver() {
         const owner = getOwner(this);
         const store = owner.lookup(`service:store`);
 
-        return store
-            .findRecord('driver', this.driver_assigned_uuid)
-            .then((driver) => {
-                this.set('driver_assigned', driver);
-                return driver;
-            })
-            .catch(() => {
-                resolve(null);
-            });
+        if (!this.driver_assigned_uuid || !isBlank(this.driver_assigned)) {
+            return;
+        }
+
+        return store.findRecord('driver', this.driver_assigned_uuid).then((driver) => {
+            this.set('driver_assigned', driver);
+            return driver;
+        });
     }
 
     async loadTrackingNumber() {
         const owner = getOwner(this);
         const store = owner.lookup(`service:store`);
 
-        return store
-            .findRecord('tracking-number', this.tracking_number_uuid)
-            .then((trackingNumber) => {
-                this.set('tracking_number', trackingNumber);
-                return trackingNumber;
-            })
-            .catch(() => {
-                resolve(null);
-            });
+        if (!this.tracking_number_uuid || !isBlank(this.tracking_number)) {
+            return;
+        }
+
+        return store.findRecord('tracking-number', this.tracking_number_uuid).then((trackingNumber) => {
+            this.set('tracking_number', trackingNumber);
+            return trackingNumber;
+        });
     }
 
     async loadTrackingActivity() {
         const owner = getOwner(this);
         const store = owner.lookup(`service:store`);
 
+        if (!this.tracking_number_uuid || !isBlank(this.tracking_statuses)) {
+            return;
+        }
+
         return store
             .query('tracking-status', {
                 tracking_number_uuid: this.tracking_number_uuid,
             })
             .then((activity) => {
-                this.set('tracking_statuses', activity);
+                this.set('tracking_statuses', activity.toArray());
                 return activity;
-            })
-            .catch(() => {
-                resolve(null);
             });
     }
 }
