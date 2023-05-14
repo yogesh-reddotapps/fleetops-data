@@ -15,7 +15,7 @@ export default class DriverSerializer extends ApplicationSerializer.extend(Embed
             fleets: { embedded: 'always' },
             vendor: { embedded: 'always' },
             vehicle: { embedded: 'always' },
-            devices: { serialize: 'records' },
+            devices: { embedded: 'always' },
             current_job: { embedded: 'always' },
             jobs: { embedded: 'always' },
         };
@@ -24,8 +24,13 @@ export default class DriverSerializer extends ApplicationSerializer.extend(Embed
     serializeBelongsTo(snapshot, json, relationship) {
         let key = relationship.key;
 
+        if (key === 'fleets' || key === 'current_job' || key === 'user' || key === 'vendor') {
+            return;
+        }
+
         if (key === 'vehicle' && isArray(json[key])) {
-            json[key] = json[key].uuid;
+            json[`${key}_uuid`] = get(json, `${key}.uuid`);
+            return;
         }
 
         super.serializeBelongsTo(...arguments);
@@ -34,7 +39,7 @@ export default class DriverSerializer extends ApplicationSerializer.extend(Embed
     serializeHasMany(snapshot, json, relationship) {
         let key = relationship.key;
 
-        if (key === 'jobs' || key === 'orders') {
+        if (key === 'jobs' || key === 'orders' || key == 'fleets') {
             return;
         }
 

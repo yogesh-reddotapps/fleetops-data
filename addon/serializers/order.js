@@ -21,17 +21,17 @@ export default class OrderSerializer extends ApplicationSerializer.extend(Embedd
     }
 
     /**
-     * Attributes we want to remove when sending to server.
+     * Serialize the record and remove unwanted attributes.
      *
      * @param {Snapshot} snapshot
-     * @param {Object} json
-     * @param {String} key
-     * @param {Array} attributes
+     * @param {Object} options
+     * @returns {Object}
      */
-    serializeAttribute(snapshot, json, key, attributes) {
-        super.serializeAttribute(snapshot, json, key, attributes);
-
+    serialize(snapshot, options) {
+        const json = super.serialize(snapshot, options);
         const unshiftAttributes = [
+            'order_config',
+            'order_config_uuid',
             'driver_name',
             'tracking',
             'total_entities',
@@ -49,8 +49,20 @@ export default class OrderSerializer extends ApplicationSerializer.extend(Embedd
             'purchase_rate_id',
         ];
 
-        if (unshiftAttributes.includes(key)) {
-            delete json[key];
+        unshiftAttributes.forEach((attr) => {
+            delete json[attr];
+        });
+
+        return json;
+    }
+
+    serializeBelongsTo(snapshot, json, relationship) {
+        let key = relationship.key;
+
+        if (key === 'order_config' || key === 'driver_assigned') {
+            return;
         }
+
+        super.serializeBelongsTo(...arguments);
     }
 }

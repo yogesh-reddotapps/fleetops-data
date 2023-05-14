@@ -18,4 +18,14 @@ export default class EntitySerializer extends ApplicationSerializer.extend(Embed
             customer: { embedded: 'always' },
         };
     }
+
+    serializeBelongsTo(snapshot, json, relationship) {
+      let key = relationship.key;
+
+      if (key === 'payload' || key === 'facilitator' || key === 'customer' || key === 'driver') {
+          return;
+      }
+
+      super.serializeBelongsTo(...arguments);
+  }
 }

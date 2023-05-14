@@ -484,7 +484,7 @@ export default class OrderModel extends Model {
         const owner = getOwner(this);
         const store = owner.lookup(`service:store`);
 
-        if (!this.tracking_number_uuid || !isBlank(this.tracking_statuses)) {
+        if (!this.tracking_number_uuid) {
             return;
         }
 

@@ -15,6 +15,7 @@ export default class FacilitatorModel extends Model {
   @attr('string') name;
   @attr('string') facilitator_type;
   @attr('string') provider;
+  @attr('string') photo_url;
   @attr('raw') provider_settings;
   @attr('raw') service_types;
   @attr('raw') supported_countries;

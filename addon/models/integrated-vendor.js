@@ -29,6 +29,7 @@ export default class IntegratedVendorModel extends FacilitatorModel {
   @attr('boolean') sandbox;
   @attr('boolean', { defaultValue: true }) isIntegratedVendor;
   @attr('raw') credentials;
+  @attr('raw') options;
   @attr('raw') provider_settings;
   @attr('raw') service_types;
   @attr('raw') supported_countries;

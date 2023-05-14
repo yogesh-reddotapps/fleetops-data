@@ -12,4 +12,13 @@ export default class ServiceAreaSerializer extends ApplicationSerializer.extend(
             zones: { embedded: 'always' },
         };
     }
+
+    serializeHasMany(snapshot, json, relationship) {
+        let key = relationship.key;
+        if (key === 'zones') {
+            return;
+        } else {
+            super.serializeHasMany(...arguments);
+        }
+    }
 }

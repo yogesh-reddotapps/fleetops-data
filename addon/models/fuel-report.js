@@ -1,4 +1,4 @@
-import Model, { attr } from '@ember-data/model';
+import Model, { attr, belongsTo } from '@ember-data/model';
 import { computed } from '@ember/object';
 import {
   format as formatDate,
@@ -13,18 +13,20 @@ export default class FuelReportModel extends Model {
   @attr('string') driver_uuid;
   @attr('string') vehicle_uuid;
 
+  /** @relationships */
+  @belongsTo('driver') driver;
+  @belongsTo('vehicle') vehicle;
+
   /** @attributes */
   @attr('string') driver_name;
   @attr('string') vehicle_name;
   @attr('string') odometer;
-  @attr('string') latitude;
-  @attr('string') longitude;
-  @attr('point') location;
   @attr('string') amount;
   @attr('string') currency;
   @attr('string') volume;
   @attr('string', { defaultValue: 'L' }) metric_unit;
   @attr('string') type;
+  @attr('point') location;
 
   /** @dates */
   @attr('date') deleted_at;
