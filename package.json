@@ -1,16 +1,22 @@
 {
     "name": "@fleetbase/fleetops-data",
-    "version": "0.0.0",
-    "description": "The default blueprint for ember-cli addons.",
+    "version": "0.0.1",
+    "description": "Fleetbase Fleet-Ops based models, serializers, transforms, adapters and GeoJson utility functions.",
     "keywords": [
-        "ember-addon"
+        "fleetbase-data",
+        "fleetops-data",
+        "fleetbase-fleet-ops",
+        "fleetbase",
+        "ember-addon",
+        "ember-engine"
     ],
-    "repository": "",
+    "repository": "https://github.com/fleetbase/fleetops-data",
     "license": "MIT",
-    "author": "",
+    "author": "Fleetbase Pte Ltd <hello@fleetbase.io>",
     "directories": {
-        "doc": "doc",
-        "test": "tests"
+        "app": "app",
+        "addon": "addon",
+        "tests": "tests"
     },
     "scripts": {
         "build": "ember build --environment=production",
