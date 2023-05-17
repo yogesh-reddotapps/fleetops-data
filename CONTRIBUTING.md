@@ -3,7 +3,7 @@
 ## Installation
 
 * `git clone <repository-url>`
-* `cd fleetops-models`
+* `cd fleetops-data`
 * `yarn install`
 
 ## Linting
