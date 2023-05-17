@@ -7,14 +7,7 @@ import isRelationMissing from '@fleetbase/ember-core/utils/is-relation-missing';
 import isValidCoordinates from '@fleetbase/ember-core/utils/is-valid-coordinates';
 import isLatitude from '@fleetbase/ember-core/utils/is-latitude';
 import isLongitude from '@fleetbase/ember-core/utils/is-longitude';
-// import config from '../config/environment';
-
-const config = {
-    defaultValues: {
-        driverImage: null,
-        vehicleImage: null,
-    },
-};
+import config from 'ember-get-config';
 
 export default class DriverModel extends Model {
     /** @ids */
