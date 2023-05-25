@@ -1,7 +1,7 @@
 import FacilitatorModel from './facilitator';
 import { attr } from '@ember-data/model';
 
-export default class FacilitatorCustomerModel extends Model {
+export default class FacilitatorCustomerModel extends FacilitatorModel {
     /** @ids */
     @attr('string') uuid;
     @attr('string') public_id;

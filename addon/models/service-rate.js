@@ -2,7 +2,7 @@ import Model, { attr, hasMany, belongsTo } from '@ember-data/model';
 import { computed } from '@ember/object';
 import { getOwner } from '@ember/application';
 import { isArray } from '@ember/array';
-import { format as formatDate, isValid as isValidDate, formatDistanceToNow } from 'date-fns';
+import { format as formatDate, formatDistanceToNow } from 'date-fns';
 import isModel from '@fleetbase/ember-core/utils/is-model';
 
 export default class ServiceRate extends Model {

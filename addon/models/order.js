@@ -5,10 +5,8 @@ import { notEmpty, not, bool, alias, equal } from '@ember/object/computed';
 import { isArray } from '@ember/array';
 import { isBlank } from '@ember/utils';
 import { getOwner } from '@ember/application';
-import { capitalize, camelize } from '@ember/string';
 import { format as formatDate, formatDistanceToNow, isValid as isValidDate } from 'date-fns';
 import groupBy from '@fleetbase/ember-core/utils/macros/group-by';
-import isRelationMissing from '@fleetbase/ember-core/utils/is-relation-missing';
 import isNotModel from '@fleetbase/ember-core/utils/is-not-model';
 
 export default class OrderModel extends Model {
@@ -103,7 +101,7 @@ export default class OrderModel extends Model {
     @equal('type', 'storefront') isStorefrontOrder;
     @groupBy('order_config.meta.fields', 'group') groupedMetaFields;
 
-    @computed('payload.pickup.name', 'payload.current_waypoint_uuid', 'payload.waypoints.@each.name')
+    @computed('payload.{pickup.name,current_waypoint_uui,waypoints.@each.name}')
     get pickupName() {
         const { payload, meta } = this;
 
@@ -402,7 +400,7 @@ export default class OrderModel extends Model {
         return this;
     }
 
-    async loadPayload(force = false) {
+    async loadPayload(options = {}) {
         const owner = getOwner(this);
         const store = owner.lookup(`service:store`);
 
@@ -411,18 +409,22 @@ export default class OrderModel extends Model {
         }
 
         return store
-            .queryRecord('payload', {
-                uuid: this.payload_uuid,
-                single: true,
-                with: ['pickup', 'dropoff', 'return', 'waypoints', 'entities'],
-            })
+            .queryRecord(
+                'payload',
+                {
+                    uuid: this.payload_uuid,
+                    single: true,
+                    with: ['pickup', 'dropoff', 'return', 'waypoints', 'entities'],
+                },
+                options
+            )
             .then((payload) => {
                 this.set('payload', payload);
                 return payload;
             });
     }
 
-    async loadCustomer() {
+    async loadCustomer(options = {}) {
         const owner = getOwner(this);
         const store = owner.lookup(`service:store`);
 
@@ -430,13 +432,13 @@ export default class OrderModel extends Model {
             return;
         }
 
-        return store.findRecord(`customer-${this.customer_type}`, this.customer_uuid).then((customer) => {
+        return store.findRecord(`customer-${this.customer_type}`, this.customer_uuid, options).then((customer) => {
             this.set('customer', customer);
             return customer;
         });
     }
 
-    async loadOrderConfig() {
+    async loadOrderConfig(options = {}) {
         const owner = getOwner(this);
         const fetch = owner.lookup(`service:fetch`);
 
@@ -445,14 +447,14 @@ export default class OrderModel extends Model {
         }
 
         return fetch
-            .get('fleet-ops/order-configs/get-installed', { key: this.type ?? 'default', single: true }, { normalizeToEmberData: true, normalizeModelType: 'order-config' })
+            .get('fleet-ops/order-configs/get-installed', { key: this.type ?? 'default', single: true }, { normalizeToEmberData: true, normalizeModelType: 'order-config', ...options })
             .then((orderConfig) => {
                 this.set('order_config', orderConfig);
                 return orderConfig;
             });
     }
 
-    async loadDriver() {
+    async loadDriver(options = {}) {
         const owner = getOwner(this);
         const store = owner.lookup(`service:store`);
 
@@ -460,13 +462,13 @@ export default class OrderModel extends Model {
             return;
         }
 
-        return store.findRecord('driver', this.driver_assigned_uuid).then((driver) => {
+        return store.findRecord('driver', this.driver_assigned_uuid, options).then((driver) => {
             this.set('driver_assigned', driver);
             return driver;
         });
     }
 
-    async loadTrackingNumber() {
+    async loadTrackingNumber(options = {}) {
         const owner = getOwner(this);
         const store = owner.lookup(`service:store`);
 
@@ -474,13 +476,13 @@ export default class OrderModel extends Model {
             return;
         }
 
-        return store.findRecord('tracking-number', this.tracking_number_uuid).then((trackingNumber) => {
+        return store.findRecord('tracking-number', this.tracking_number_uuid, options).then((trackingNumber) => {
             this.set('tracking_number', trackingNumber);
             return trackingNumber;
         });
     }
 
-    async loadTrackingActivity() {
+    async loadTrackingActivity(options = {}) {
         const owner = getOwner(this);
         const store = owner.lookup(`service:store`);
 
@@ -489,9 +491,13 @@ export default class OrderModel extends Model {
         }
 
         return store
-            .query('tracking-status', {
-                tracking_number_uuid: this.tracking_number_uuid,
-            })
+            .query(
+                'tracking-status',
+                {
+                    tracking_number_uuid: this.tracking_number_uuid,
+                },
+                options
+            )
             .then((activity) => {
                 this.set('tracking_statuses', activity.toArray());
                 return activity;

@@ -39,6 +39,9 @@ export default function geojsonCreatePrimitive(geojson) {
             case 'GeometryCollection':
                 return new GeometryCollection(geojson);
 
+            case 'Circle':
+                return new Circle(geojson);
+
             default:
                 throw new Error('Unknown type: ' + geojson.type);
         }

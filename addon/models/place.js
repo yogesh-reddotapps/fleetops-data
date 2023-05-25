@@ -1,4 +1,4 @@
-import Model, { attr, belongsTo } from '@ember-data/model';
+import Model, { attr } from '@ember-data/model';
 import { tracked } from '@glimmer/tracking';
 import { computed, get } from '@ember/object';
 import { not } from '@ember/object/computed';

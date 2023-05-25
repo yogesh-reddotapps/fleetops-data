@@ -15,7 +15,12 @@ module.exports = {
     env: {
         browser: true,
     },
-    rules: {},
+    rules: {
+        'ember/no-get': 'off',
+        'ember/no-computed-properties-in-native-classes': 'off',
+        'ember/classic-decorator-no-classic-methods': 'off',
+        'ember/no-array-prototype-extensions': 'off',
+    },
     overrides: [
         // node files
         {
