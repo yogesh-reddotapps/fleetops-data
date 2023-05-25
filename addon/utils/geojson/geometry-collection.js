@@ -4,6 +4,8 @@ import { isArray } from '@ember/array';
 
 export default class GeometryCollection extends GeoJson {
     constructor(input) {
+        super();
+
         if (input && input.type === 'GeometryCollection' && input.geometries) {
             assign(this, input);
         } else if (isArray(input)) {
@@ -25,6 +27,6 @@ export default class GeometryCollection extends GeoJson {
     }
 
     get(i) {
-        return new Primitive(this.geometries[i]);
+        return new GeoJson(this.geometries[i]);
     }
 }

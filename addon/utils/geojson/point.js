@@ -1,6 +1,5 @@
 import GeoJson from './geo-json';
 import { assign } from '@ember/polyfills';
-import calculateBounds from './calculate-bounds';
 import { isArray } from '@ember/array';
 
 export default class Point extends GeoJson {

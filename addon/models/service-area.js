@@ -1,5 +1,5 @@
 import Model, { attr, hasMany } from '@ember-data/model';
-import { computed, get } from '@ember/object';
+import { computed } from '@ember/object';
 import { format as formatDate, isValid as isValidDate, formatDistanceToNow } from 'date-fns';
 import extractCoordinates from '@fleetbase/ember-core/utils/extract-coordinates';
 import getWithDefault from '@fleetbase/ember-core/utils/get-with-default';

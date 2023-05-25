@@ -1,7 +1,6 @@
 import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 import { computed } from '@ember/object';
 import { notEmpty } from '@ember/object/computed';
-import { isArray } from '@ember/array';
 import { format as formatDate, isValid as isValidDate, formatDistanceToNow } from 'date-fns';
 
 export default class PayloadModel extends Model {

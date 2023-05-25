@@ -1,7 +1,7 @@
-import GeoJson from './geo-json';
+import GeoJson, { EarthRadius, MercatorCRS, DegreesPerRadian, RadiansPerDegree } from './geo-json';
+import Feature from './feature';
 import closedPolygon from './closed-polygon';
 import { assign } from '@ember/polyfills';
-import { isArray } from '@ember/array';
 
 function radToDeg(rad) {
     return rad * DegreesPerRadian;
@@ -109,7 +109,7 @@ export default class Circle extends GeoJson {
     }
 
     static toGeographic(geojson) {
-        return applyConverter(gejson, positionToGeographic);
+        return applyConverter(geojson, positionToGeographic);
     }
 
     recalculate() {
