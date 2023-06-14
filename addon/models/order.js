@@ -45,7 +45,6 @@ export default class OrderModel extends Model {
     /** @attributes */
     @attr('string') tracking;
     @attr('string') meta;
-    @attr('string') info;
     @attr('string') tracking;
     @attr('string') qr_code;
     @attr('string') pickup_name;

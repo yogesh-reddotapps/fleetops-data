@@ -16,14 +16,4 @@ export default class PayloadSerializer extends ApplicationSerializer.extend(Embe
             entities: { embedded: 'always' },
         };
     }
-
-    serializeBelongsTo(snapshot, json, relationship) {
-        let key = relationship.key;
-
-        if (key === 'pickup' || key === 'dropoff' || key === 'return') {
-            return;
-        }
-
-        super.serializeBelongsTo(...arguments);
-    }
 }
