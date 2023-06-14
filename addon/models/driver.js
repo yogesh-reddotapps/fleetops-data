@@ -16,8 +16,6 @@ export default class DriverModel extends Model {
     @attr('string') user_uuid;
     @attr('string') vehicle_uuid;
     @attr('string') vendor_uuid;
-    @attr('string') photo_uuid;
-    @attr('string') signup_token_uuid;
     @attr('string') current_job_uuid;
     @attr('string') vehicle_id;
     @attr('string') vendor_id;
@@ -29,7 +27,6 @@ export default class DriverModel extends Model {
     @hasMany('user-device', { async: true }) devices;
     @hasMany('order', { async: true }) jobs;
     @belongsTo('vehicle', { async: true }) vehicle;
-    @belongsTo('file', { async: true }) photo;
     @belongsTo('order', { async: true }) current_job;
     @belongsTo('vendor', { async: true }) vendor;
 
@@ -37,7 +34,6 @@ export default class DriverModel extends Model {
     @attr('string') name;
     @attr('string') phone;
     @attr('string') email;
-    @attr('string') password;
     @attr('string', {
         defaultValue: get(config, 'defaultValues.driverImage'),
     })
