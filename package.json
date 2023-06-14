@@ -1,6 +1,6 @@
 {
     "name": "@fleetbase/fleetops-data",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "Fleetbase Fleet-Ops based models, serializers, transforms, adapters and GeoJson utility functions.",
     "keywords": [
         "fleetbase-data",
@@ -37,7 +37,7 @@
         "ember-cli-htmlbars": "^6.1.0"
     },
     "devDependencies": {
-        "@fleetbase/ember-core": "^0.0.6",
+        "@fleetbase/ember-core": "^0.0.7",
         "@ember/optional-features": "^2.0.0",
         "@ember/test-helpers": "^2.8.1",
         "@embroider/test-setup": "^1.8.3",

@@ -22,8 +22,8 @@ devDependencies:
     specifier: ^1.8.3
     version: 1.8.3
   '@fleetbase/ember-core':
-    specifier: ^0.0.6
-    version: 0.0.6(@babel/core@7.21.8)(ember-fetch@8.1.2)(postcss@8.4.23)(webpack@5.74.0)
+    specifier: ^0.0.7
+    version: 0.0.7(@babel/core@7.21.8)(ember-fetch@8.1.2)(postcss@8.4.23)(webpack@5.74.0)
   '@glimmer/component':
     specifier: ^1.1.2
     version: 1.1.2(@babel/core@7.21.8)
@@ -1666,8 +1666,8 @@ packages:
       - supports-color
     dev: true
 
-  /@fleetbase/ember-core@0.0.6(@babel/core@7.21.8)(ember-fetch@8.1.2)(postcss@8.4.23)(webpack@5.74.0):
-    resolution: {integrity: sha512-/m1UIIOKGn0kX74tct2gV1Nz8Fr1URyQia7p8QfjaiguLqjxOf1Php85RJaCZMUEy0XZ3URHTZYeLoDxK2/+Qg==}
+  /@fleetbase/ember-core@0.0.7(@babel/core@7.21.8)(ember-fetch@8.1.2)(postcss@8.4.23)(webpack@5.74.0):
+    resolution: {integrity: sha512-sHByATuNUjgihChE5/Pa2U35emlRVyAbvkOk+fSC1d3mX3sTm7mpsM+Z+gW8+ohbjCY+U3daWFio2458pntM0w==}
     engines: {node: 14.* || >= 16}
     dependencies:
       date-fns: 2.29.3
