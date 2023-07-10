@@ -15,7 +15,7 @@ export default class IntegratedVendorModel extends FacilitatorModel {
     @attr('string') webhook_url;
     @attr('string') provider;
     @attr('string') name;
-    @attr('string') photo_url;
+    @attr('string') logo_url;
     @attr('string') status;
     @attr('string') type;
     @attr('string') address;
