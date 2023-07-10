@@ -21,7 +21,7 @@ export default class VendorModel extends Model {
     @attr('string') name;
     @attr('string') email;
     @attr('string') website_url;
-    @attr('string') photo_url;
+    @attr('string') logo_url;
     @attr('string') phone;
     @attr('string') address;
     @attr('string') address_street;

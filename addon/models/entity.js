@@ -20,7 +20,6 @@ export default class EntityModel extends Model {
     @belongsTo('customer', { polymorphic: true, async: false }) customer;
     @belongsTo('facilitator', { polymorphic: true, async: false }) facilitator;
     @belongsTo('driver') driver;
-    @belongsTo('customer', { polymorphic: true, async: false }) customer;
     @belongsTo('tracking-number') trackingNumber;
     @belongsTo('place') destination;
     @belongsTo('file') photo;
