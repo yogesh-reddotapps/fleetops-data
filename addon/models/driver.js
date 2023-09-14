@@ -46,7 +46,7 @@ export default class DriverModel extends Model {
     @attr('string') vendor_name;
     @attr('string') drivers_license_number;
     @attr('point') location;
-    @attr('string') heading;
+    @attr('number') heading;
     @attr('string') country;
     @attr('string') city;
     @attr('string') status;

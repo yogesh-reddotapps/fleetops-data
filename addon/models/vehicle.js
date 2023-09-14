@@ -12,6 +12,7 @@ export default class VehicleModel extends Model {
     @attr('string') company_uuid;
     @attr('string') photo_uuid;
     @attr('string') driver_uuid;
+    @attr('string') vendor_uuid;
 
     /** @relationships */
     @belongsTo('driver', { async: false }) driver;
@@ -23,15 +24,13 @@ export default class VehicleModel extends Model {
     })
     photo_url;
     @attr('string') driver_name;
-    @attr('string') driver_id;
-    @attr('string') driver_uuid;
     @attr('string') vendor_name;
-    @attr('string') vendor_id;
     @attr('string') display_name;
     @attr('string', {
         defaultValue: get(config, 'defaultValues.vehicleAvatar'),
     })
     avatar_url;
+    @attr('point') location;
     @attr('string') make;
     @attr('string') model;
     @attr('string') year;
@@ -39,37 +38,10 @@ export default class VehicleModel extends Model {
     @attr('string') type;
     @attr('string') plate_number;
     @attr('string') vin;
-    @attr('string') vin_data;
-    @attr('string') model_0_to_100_kph;
-    @attr('string') model_body;
-    @attr('string') model_co2;
-    @attr('string') model_doors;
-    @attr('string') model_drive;
-    @attr('string') model_engine_bore_mm;
-    @attr('string') model_engine_cc;
-    @attr('string') model_engine_compression;
-    @attr('string') model_engine_cyl;
-    @attr('string') model_engine_fuel;
-    @attr('string') model_engine_position;
-    @attr('string') model_engine_power_ps;
-    @attr('string') model_engine_power_rpm;
-    @attr('string') model_engine_stroke_mm;
-    @attr('string') model_engine_torque_nm;
-    @attr('string') model_engine_torque_rpm;
-    @attr('string') model_engine_valves_per_cyl;
-    @attr('string') model_fuel_cap_l;
-    @attr('string') model_length_mm;
-    @attr('string') model_lkm_city;
-    @attr('string') model_lkm_hwy;
-    @attr('string') model_lkm_mixed;
-    @attr('string') model_make_display;
-    @attr('string') model_seats;
-    @attr('string') model_sold_in_us;
-    @attr('string') model_top_speed_kph;
-    @attr('string') model_transmission_type;
-    @attr('string') model_weight_kg;
-    @attr('string') model_wheelbase_mm;
-    @attr('string') model_width_mm;
+    @attr('raw') vin_data;
+    @attr('raw') model;
+    @attr('raw') telematics;
+    @attr('raw') meta;
     @attr('string') status;
     @attr('string') slug;
 
