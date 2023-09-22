@@ -1,4 +1,4 @@
-import Model, { attr, belongsTo } from '@ember-data/model';
+import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 import { get, computed } from '@ember/object';
 import { format as formatDate, isValid as isValidDate, formatDistanceToNow } from 'date-fns';
 import { getOwner } from '@ember/application';
@@ -17,6 +17,8 @@ export default class VehicleModel extends Model {
     /** @relationships */
     @belongsTo('driver', { async: false }) driver;
     @belongsTo('vendor', { async: false }) vendor;
+
+    @hasMany('vehicle-device', { async: false }) vehicle_devices;
 
     /** @attributes */
     @attr('string', {
