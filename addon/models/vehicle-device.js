@@ -2,7 +2,9 @@ import Model, { attr, belongsTo } from '@ember-data/model';
 
 export default class VehicleDeviceModel extends Model {
     @attr('string') uuid;
-    @attr('string') photo_uuid;
+    @attr('string') vehicle_uuid;
+    @attr('string') device_id;
+    @attr('string') device_provider;
     @attr('string') device_type;
     @attr('string') device_name;
     @attr('string') device_model;
@@ -14,5 +16,4 @@ export default class VehicleDeviceModel extends Model {
     @attr('string') status;
     @attr('string') data_frequency;
     @attr('string') notes;
-    @belongsTo('vehicle', { async: false }) vehicle;
 }
