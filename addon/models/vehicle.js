@@ -17,7 +17,7 @@ export default class VehicleModel extends Model {
     /** @relationships */
     @belongsTo('driver', { async: false }) driver;
     @belongsTo('vendor', { async: false }) vendor;
-    @hasMany('vehicle-device', { async: false }) vehicle_devices;
+    @hasMany('vehicle-device', { async: false }) devices;
 
     /** @attributes */
     @attr('string', {
@@ -53,14 +53,7 @@ export default class VehicleModel extends Model {
 
     /** @computed */
     @computed('year', 'make', 'model', 'trim', 'plate_number', 'internal_id') get displayName() {
-        const nameSegments = [
-            this.year,
-            this.make,
-            this.model,
-            this.trim,
-            this.plate_number,
-            this.internal_id,
-        ];
+        const nameSegments = [this.year, this.make, this.model, this.trim, this.plate_number, this.internal_id];
 
         return nameSegments.filter(Boolean).join(' ').trim();
     }
