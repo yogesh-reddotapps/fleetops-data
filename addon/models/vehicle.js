@@ -1,4 +1,4 @@
-import Model, { attr, belongsTo } from '@ember-data/model';
+import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 import { get, computed } from '@ember/object';
 import { format as formatDate, isValid as isValidDate, formatDistanceToNow } from 'date-fns';
 import { getOwner } from '@ember/application';
@@ -17,6 +17,7 @@ export default class VehicleModel extends Model {
     /** @relationships */
     @belongsTo('driver', { async: false }) driver;
     @belongsTo('vendor', { async: false }) vendor;
+    @hasMany('vehicle-device', { async: false }) devices;
 
     /** @attributes */
     @attr('string', {
@@ -51,6 +52,11 @@ export default class VehicleModel extends Model {
     @attr('date') updated_at;
 
     /** @computed */
+    @computed('year', 'make', 'model', 'trim', 'plate_number', 'internal_id') get displayName() {
+        const nameSegments = [this.year, this.make, this.model, this.trim, this.plate_number, this.internal_id];
+        return nameSegments.filter(Boolean).join(' ').trim();
+    }
+
     @computed('updated_at') get updatedAgo() {
         if (!isValidDate(this.updated_at)) {
             return null;
@@ -113,6 +119,21 @@ export default class VehicleModel extends Model {
             }
 
             resolve(this.driver);
+        });
+    }
+    loadDevices() {
+        const owner = getOwner(this);
+        const store = owner.lookup(`service:store`);
+
+        return new Promise((resolve, reject) => {
+            return store
+                .findRecord('vehicle-device', { vehicle_uuid: this.id })
+                .then((devices) => {
+                    this.vehicle_devices = devices;
+
+                    resolve(devices);
+                })
+                .catch(reject);
         });
     }
 }
