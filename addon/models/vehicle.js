@@ -13,6 +13,7 @@ export default class VehicleModel extends Model {
     @attr('string') photo_uuid;
     @attr('string') driver_uuid;
     @attr('string') vendor_uuid;
+    @attr('boolean') online;
 
     /** @relationships */
     @belongsTo('driver', { async: false }) driver;
