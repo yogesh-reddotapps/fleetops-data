@@ -9,9 +9,21 @@ export default class FleetSerializer extends ApplicationSerializer.extend(Embedd
      */
     get attrs() {
         return {
+            vendor: { embedded: 'always' },
+            parent_fleet: { embedded: 'always' },
             service_area: { embedded: 'always' },
             zone: { embedded: 'always' },
             drivers: { embedded: 'always' },
         };
+    }
+    
+    serializeBelongsTo(snapshot, json, relationship) {
+        let key = relationship.key;
+
+        if (key === 'parent_fleet') {
+            return;
+        }
+
+        return super.serializeBelongsTo(...arguments);
     }
 }
