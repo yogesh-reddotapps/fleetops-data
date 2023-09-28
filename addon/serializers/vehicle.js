@@ -11,6 +11,7 @@ export default class VehicleSerializer extends ApplicationSerializer.extend(Embe
         return {
             driver: { embedded: 'always' },
             vendor: { embedded: 'always' },
+            devices: { embedded: 'always' },
         };
     }
 
