@@ -8,7 +8,7 @@ export default class FleetModel extends Model {
     @attr('string') company_uuid;
     @attr('string') image_uuid;
     @attr('string') service_area_uuid;
-    // @attr('string') zone_uuid;
+    @attr('string') zone_uuid;
     @attr('string') vendor_uuid;
     @attr('string') parent_fleet_uuid;
 
@@ -18,7 +18,7 @@ export default class FleetModel extends Model {
     @hasMany('fleet', { inverse: 'parent_fleet' }) subfleets;
 
     @belongsTo('service-area') service_area;
-    // @belongsTo('zone') zone;
+    @belongsTo('zone') zone;
     @hasMany('driver') drivers;
 
     /** @attributes */
