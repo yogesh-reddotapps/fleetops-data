@@ -11,7 +11,6 @@ export default class VehicleModel extends Model {
     @attr('string') public_id;
     @attr('string') company_uuid;
     @attr('string') photo_uuid;
-    @attr('string') driver_uuid;
     @attr('string') vendor_uuid;
     @attr('boolean') online;
 
