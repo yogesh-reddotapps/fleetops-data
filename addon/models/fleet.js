@@ -14,11 +14,10 @@ export default class FleetModel extends Model {
 
     /** @relationships */
     @belongsTo('vendor') vendor;
-    @belongsTo('fleet', { inverse: 'subfleets', async: false }) parent_fleet;
-    @hasMany('fleet', { inverse: 'parent_fleet' }) subfleets;
-
     @belongsTo('service-area') service_area;
     @belongsTo('zone') zone;
+    @belongsTo('fleet', { inverse: 'subfleets', async: false }) parent_fleet;
+    @hasMany('fleet', { inverse: 'parent_fleet' }) subfleets;
     @hasMany('driver') drivers;
     @hasMany('vehicle') vehicles;
 
