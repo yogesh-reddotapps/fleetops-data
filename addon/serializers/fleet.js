@@ -14,6 +14,7 @@ export default class FleetSerializer extends ApplicationSerializer.extend(Embedd
             service_area: { embedded: 'always' },
             zone: { embedded: 'always' },
             drivers: { embedded: 'always' },
+            vehicles: { embedded: 'always' },
         };
     }
     

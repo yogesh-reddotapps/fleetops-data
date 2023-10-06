@@ -20,6 +20,7 @@ export default class FleetModel extends Model {
     @belongsTo('service-area') service_area;
     @belongsTo('zone') zone;
     @hasMany('driver') drivers;
+    @hasMany('vehicle') vehicles;
 
     /** @attributes */
     @attr('number') drivers_count;
