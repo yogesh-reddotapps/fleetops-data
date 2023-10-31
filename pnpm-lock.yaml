@@ -1727,7 +1727,7 @@ packages:
     dev: true
 
   /@fleetbase/ember-core@0.1.6(@babel/core@7.23.2)(ember-fetch@8.1.2)(postcss@8.4.31)(webpack@5.74.0):
-    resolution: {integrity: sha512-S17tzOM/h+ao8vX9t3Fn8Dr+Ge/oznFOUaB4cXzlnChpB/UBAVvAXocikFnuMWiHUaZqm498oQRo2Fp9zc+Y2w==, tarball: https://npm.pkg.github.com/download/@fleetbase/ember-core/0.1.6/29b56c24a2a681e76ae5bb2b23b5797fd0e71dd3}
+    resolution: {integrity: sha512-S17tzOM/h+ao8vX9t3Fn8Dr+Ge/oznFOUaB4cXzlnChpB/UBAVvAXocikFnuMWiHUaZqm498oQRo2Fp9zc+Y2w==}
     engines: {node: 14.* || >= 16}
     dependencies:
       date-fns: 2.30.0
@@ -2905,7 +2905,7 @@ packages:
     hasBin: true
     dependencies:
       browserslist: 4.22.1
-      caniuse-lite: 1.0.30001558
+      caniuse-lite: 1.0.30001559
       normalize-range: 0.1.2
       num2fraction: 1.2.2
       picocolors: 0.2.1
@@ -4095,7 +4095,7 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001558
+      caniuse-lite: 1.0.30001559
       electron-to-chromium: 1.4.571
       node-releases: 2.0.13
       update-browserslist-db: 1.0.13(browserslist@4.22.1)
@@ -4233,13 +4233,13 @@ packages:
     resolution: {integrity: sha512-bsTwuIg/BZZK/vreVTYYbSWoe2F+71P7K5QGEX+pT250DZbfU1MQ5prOKpPR+LL6uWKK3KMwMCAS74QB3Um1uw==}
     dependencies:
       browserslist: 4.22.1
-      caniuse-lite: 1.0.30001558
+      caniuse-lite: 1.0.30001559
       lodash.memoize: 4.1.2
       lodash.uniq: 4.5.0
     dev: true
 
-  /caniuse-lite@1.0.30001558:
-    resolution: {integrity: sha512-/Et7DwLqpjS47JPEcz6VnxU9PwcIdVi0ciLXRWBQdj1XFye68pSQYpV0QtPTfUKWuOaEig+/Vez2l74eDc1tPQ==}
+  /caniuse-lite@1.0.30001559:
+    resolution: {integrity: sha512-cPiMKZgqgkg5LY3/ntGeLFUpi6tzddBNS58A4tnTgQw1zON7u2sZMU7SzOeVH4tj20++9ggL+V6FDOFMTaFFYA==}
 
   /capture-exit@2.0.0:
     resolution: {integrity: sha512-PiT/hQmTonHhl/HFGN+Lx3JJUznrVYJ3+AQsnthneZbvW7x+f08Tk7yLJTLEOUvBTbduLeeBkxEaYXUOUrRq6g==}
@@ -10578,7 +10578,7 @@ packages:
     dependencies:
       autoprefixer: 9.8.8
       browserslist: 4.22.1
-      caniuse-lite: 1.0.30001558
+      caniuse-lite: 1.0.30001559
       css-blank-pseudo: 0.1.4
       css-has-pseudo: 0.10.0
       css-prefers-color-scheme: 3.1.1
