@@ -174,20 +174,17 @@ export default class DriverModel extends Model {
     /** @methods */
     loadVehicle() {
         const owner = getOwner(this);
-        const store = owner.lookup(`service:store`);
+        const store = owner.lookup('service:store');
 
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
             if (isRelationMissing(this, 'vehicle')) {
                 return store
                     .findRecord('vehicle', this.vehicle_uuid)
                     .then((vehicle) => {
                         this.vehicle = vehicle;
-
                         resolve(vehicle);
                     })
-                    .catch(() => {
-                        resolve(null);
-                    });
+                    .catch(reject);
             }
 
             resolve(this.vehicle);
@@ -198,18 +195,15 @@ export default class DriverModel extends Model {
         const owner = getOwner(this);
         const store = owner.lookup(`service:store`);
 
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
             if (isRelationMissing(this, 'vendor')) {
                 return store
                     .findRecord('vendor', this.vendor_uuid)
                     .then((vendor) => {
                         this.vendor = vendor;
-
                         resolve(vendor);
                     })
-                    .catch(() => {
-                        resolve(null);
-                    });
+                    .catch(reject);
             }
 
             resolve(this.vendor);
