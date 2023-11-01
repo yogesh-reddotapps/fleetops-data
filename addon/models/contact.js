@@ -7,10 +7,8 @@ export default class ContactModel extends Model {
     @attr('string') public_id;
     @attr('string') company_uuid;
     @attr('string') photo_uuid;
-    @attr('string') place_uuid;
 
     /** @relationships */
-    @belongsTo('place') place;
     @belongsTo('file') photo;
 
     /** @attributes */
@@ -19,8 +17,6 @@ export default class ContactModel extends Model {
     @attr('string') email;
     @attr('string') phone;
     @attr('string') type;
-    @attr('string') customer_type;
-    @attr('string') facilitator_type;
     @attr('string', {
         defaultValue: 'https://s3.ap-southeast-1.amazonaws.com/flb-assets/static/no-avatar.png',
     })
