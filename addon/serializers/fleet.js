@@ -11,6 +11,7 @@ export default class FleetSerializer extends ApplicationSerializer.extend(Embedd
         return {
             vendor: { embedded: 'always' },
             parent_fleet: { embedded: 'always' },
+            subfleets: { embedded: 'always' },
             service_area: { embedded: 'always' },
             zone: { embedded: 'always' },
             drivers: { embedded: 'always' },
