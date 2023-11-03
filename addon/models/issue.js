@@ -9,21 +9,22 @@ export default class IssueModel extends Model {
     @attr('string') company_uuid;
     @attr('string') reported_by_uuid;
     @attr('string') assigned_to_uuid;
+    @attr('string') driver_uuid;
     @attr('string') vehicle_uuid;
 
     /** @relationships */
     @belongsTo('user') reporter;
     @belongsTo('user') assignee;
     @belongsTo('vehicle') vehicle;
+    @belongsTo('driver') driver;
 
     /** @attributes */
-    @attr('string') odometer;
-    @attr('string') latitude;
-    @attr('string') longitude;
     @attr('string') type;
     @attr('string') report;
     @attr('string') priority;
     @attr('string') status;
+    @attr('point') location;
+    @attr('raw') meta;
 
     /** @dates */
     @attr('date') deleted_at;
