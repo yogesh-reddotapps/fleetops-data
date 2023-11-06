@@ -17,6 +17,7 @@ export default class DriverModel extends Model {
     @attr('string') vehicle_uuid;
     @attr('string') vendor_uuid;
     @attr('string') current_job_uuid;
+    @attr('string') photo_uuid;
     @attr('string') vehicle_id;
     @attr('string') vendor_id;
     @attr('string') current_job_id;
