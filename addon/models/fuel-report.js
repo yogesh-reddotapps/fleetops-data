@@ -1,6 +1,8 @@
 import Model, { attr, belongsTo } from '@ember-data/model';
 import { computed } from '@ember/object';
+import { getOwner } from '@ember/application';
 import { format as formatDate, isValid as isValidDate, formatDistanceToNow } from 'date-fns';
+import isRelationMissing from '@fleetbase/ember-core/utils/is-relation-missing';
 
 export default class FuelReportModel extends Model {
     /** @ids */
@@ -8,21 +10,25 @@ export default class FuelReportModel extends Model {
     @attr('string') company_uuid;
     @attr('string') driver_uuid;
     @attr('string') vehicle_uuid;
+    @attr('string') reported_by_uuid;
 
     /** @relationships */
     @belongsTo('driver') driver;
     @belongsTo('vehicle') vehicle;
+    @belongsTo('user') reporter;
 
     /** @attributes */
+    @attr('string') reporter_name;
     @attr('string') driver_name;
     @attr('string') vehicle_name;
+    @attr('string') report;
     @attr('string') odometer;
     @attr('string') amount;
     @attr('string') currency;
     @attr('string') volume;
     @attr('string', { defaultValue: 'L' }) metric_unit;
-    @attr('string') type;
     @attr('point') location;
+    @attr('raw') meta;
 
     /** @dates */
     @attr('date') deleted_at;
@@ -70,5 +76,44 @@ export default class FuelReportModel extends Model {
             return null;
         }
         return formatDate(this.created_at, 'PP');
+    }
+
+    /** @methods */
+    loadVehicle() {
+        const owner = getOwner(this);
+        const store = owner.lookup('service:store');
+
+        return new Promise((resolve, reject) => {
+            if (isRelationMissing(this, 'vehicle')) {
+                return store
+                    .findRecord('vehicle', this.vehicle_uuid)
+                    .then((vehicle) => {
+                        this.vehicle = vehicle;
+                        resolve(vehicle);
+                    })
+                    .catch(reject);
+            }
+
+            resolve(this.vehicle);
+        });
+    }
+
+    loadDriver() {
+        const owner = getOwner(this);
+        const store = owner.lookup('service:store');
+
+        return new Promise((resolve, reject) => {
+            if (isRelationMissing(this, 'driver')) {
+                return store
+                    .findRecord('driver', this.driver_uuid)
+                    .then((driver) => {
+                        this.driver = driver;
+                        resolve(driver);
+                    })
+                    .catch(reject);
+            }
+
+            resolve(this.driver);
+        });
     }
 }
