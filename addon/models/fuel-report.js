@@ -10,20 +10,24 @@ export default class FuelReportModel extends Model {
     @attr('string') company_uuid;
     @attr('string') driver_uuid;
     @attr('string') vehicle_uuid;
+    @attr('string') reported_by_uuid;
 
     /** @relationships */
     @belongsTo('driver') driver;
     @belongsTo('vehicle') vehicle;
+    @belongsTo('user') reporter;
 
     /** @attributes */
     @attr('string') driver_name;
     @attr('string') vehicle_name;
+    @attr('string') report;
     @attr('string') odometer;
     @attr('string') amount;
     @attr('string') currency;
     @attr('string') volume;
     @attr('string', { defaultValue: 'L' }) metric_unit;
     @attr('point') location;
+    @attr('raw') meta;
 
     /** @dates */
     @attr('date') deleted_at;
