@@ -1,7 +1,8 @@
 import Model, { attr, belongsTo } from '@ember-data/model';
-import { computed } from '@ember/object';
+import { computed, get } from '@ember/object';
 import { notEmpty } from '@ember/object/computed';
 import { format as formatDate, isValid as isValidDate, formatDistanceToNow } from 'date-fns';
+import config from 'ember-get-config';
 
 export default class VendorModel extends Model {
     /** @ids */
@@ -21,7 +22,10 @@ export default class VendorModel extends Model {
     @attr('string') name;
     @attr('string') email;
     @attr('string') website_url;
-    @attr('string') logo_url;
+    @attr('string', {
+        defaultValue: get(config, 'defaultValues.vendorImage'),
+    })
+    logo_url;
     @attr('string') phone;
     @attr('string') address;
     @attr('string') address_street;
