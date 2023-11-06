@@ -18,6 +18,7 @@ export default class FuelReportModel extends Model {
     @belongsTo('user') reporter;
 
     /** @attributes */
+    @attr('string') reporter_name;
     @attr('string') driver_name;
     @attr('string') vehicle_name;
     @attr('string') report;

@@ -1,7 +1,5 @@
 import ApplicationSerializer from '@fleetbase/ember-core/serializers/application';
 import { EmbeddedRecordsMixin } from '@ember-data/serializer/rest';
-import { get } from '@ember/object';
-import { isNone } from '@ember/utils';
 
 export default class IssueSerializer extends ApplicationSerializer.extend(EmbeddedRecordsMixin) {
     /**
@@ -26,37 +24,14 @@ export default class IssueSerializer extends ApplicationSerializer.extend(Embedd
      * @param {Object} options
      * @return {Object} json
      */
-    serialize(snapshot) {
+    serialize() {
         const json = super.serialize(...arguments);
 
-        // for each relationship make sure the id is set
-        snapshot.eachRelationship((key, relationship) => {
-            const { kind } = relationship.meta;
+        // remove automatically set `reporter_uuid`
+        delete json.reporter_uuid;
 
-            if (kind === 'belongsTo') {
-                const relationSnapshot = snapshot.belongsTo(key);
-
-                key = this.keyForRelationship ? this.keyForRelationship(key, 'belongsTo', 'serialize') : key;
-
-                if (isNone(relationSnapshot)) {
-                    return;
-                }
-
-                if (key === 'reporter') {
-                    json['reported_by_uuid'] = get(json, `${key}.uuid`);
-                    delete json.reporter;
-                    return;
-                }
-
-                if (key === 'assignee') {
-                    json['assigned_to_uuid'] = get(json, `${key}.uuid`);
-                    delete json.assignee;
-                    return;
-                }
-
-                json[`${key}_uuid`] = relationSnapshot.id;
-            }
-        });
+        // remove automatically set `assignee_uuid`
+        delete json.assignee_uuid;
 
         return json;
     }

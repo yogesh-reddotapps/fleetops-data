@@ -18,7 +18,7 @@ export default class FleetSerializer extends ApplicationSerializer.extend(Embedd
             vehicles: { embedded: 'always' },
         };
     }
-    
+
     serializeBelongsTo(snapshot, json, relationship) {
         let key = relationship.key;
 
