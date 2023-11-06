@@ -20,10 +20,12 @@ export default class IssueModel extends Model {
 
     /** @attributes */
     @attr('string') type;
+    @attr('string') category;
     @attr('string') report;
     @attr('string') priority;
     @attr('string') status;
     @attr('point') location;
+    @attr('raw') tags;
     @attr('raw') meta;
 
     /** @dates */
