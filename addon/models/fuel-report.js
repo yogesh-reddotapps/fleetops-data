@@ -27,6 +27,7 @@ export default class FuelReportModel extends Model {
     @attr('string') currency;
     @attr('string') volume;
     @attr('string', { defaultValue: 'L' }) metric_unit;
+    @attr('string') status;
     @attr('point') location;
     @attr('raw') meta;
 
