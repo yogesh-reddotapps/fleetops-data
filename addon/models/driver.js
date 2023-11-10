@@ -21,6 +21,7 @@ export default class DriverModel extends Model {
     @attr('string') vehicle_id;
     @attr('string') vendor_id;
     @attr('string') current_job_id;
+    @attr('string') internal_id;
 
     /** @relationships */
     @belongsTo('user', { async: true }) user;
