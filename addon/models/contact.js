@@ -7,6 +7,7 @@ export default class ContactModel extends Model {
     @attr('string') public_id;
     @attr('string') company_uuid;
     @attr('string') photo_uuid;
+    @attr('string') internal_id;
 
     /** @relationships */
     @belongsTo('file') photo;

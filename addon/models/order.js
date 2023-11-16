@@ -146,7 +146,7 @@ export default class OrderModel extends Model {
     }
 
     @computed('updated_at') get updatedAgo() {
-        if (!this.updated_at) {
+        if (!isValidDate(this.updated_at)) {
             return null;
         }
 
@@ -154,7 +154,7 @@ export default class OrderModel extends Model {
     }
 
     @computed('updated_at') get updatedAt() {
-        if (!this.updated_at) {
+        if (!isValidDate(this.updated_at)) {
             return null;
         }
 
@@ -162,7 +162,7 @@ export default class OrderModel extends Model {
     }
 
     @computed('updated_at') get updatedAtShort() {
-        if (!this.updated_at) {
+        if (!isValidDate(this.updated_at)) {
             return null;
         }
 
@@ -170,7 +170,7 @@ export default class OrderModel extends Model {
     }
 
     @computed('created_at') get createdAgo() {
-        if (!this.created_at) {
+        if (!isValidDate(this.created_at)) {
             return null;
         }
 
@@ -178,7 +178,7 @@ export default class OrderModel extends Model {
     }
 
     @computed('created_at') get createdAt() {
-        if (!this.created_at) {
+        if (!isValidDate(this.created_at)) {
             return null;
         }
 
@@ -186,83 +186,91 @@ export default class OrderModel extends Model {
     }
 
     @computed('created_at') get createdAtShort() {
-        if (!this.created_at) {
+        if (!isValidDate(this.created_at)) {
             return null;
         }
 
         return formatDate(this.created_at, 'PP');
     }
 
+    @computed('created_at') get createdAtWithTime() {
+        if (!isValidDate(this.created_at)) {
+            return null;
+        }
+
+        return formatDate(this.created_at, 'PP HH:mm');
+    }
+
+    @computed('created_at') get createdAtDetailed() {
+        if (!isValidDate(this.created_at)) {
+            return null;
+        }
+
+        return formatDate(this.created_at, 'PP HH:mm');
+    }
+
     @computed('dispatched_at') get dispatchedAgo() {
-        if (!this.dispatched_at) {
-            return 'N/A';
+        if (!isValidDate(this.dispatched_at)) {
+            return null;
         }
 
         return formatDistanceToNow(this.dispatched_at);
     }
 
     @computed('dispatched_at') get dispatchedAt() {
-        if (!this.dispatched_at) {
-            return 'N/A';
+        if (!isValidDate(this.dispatched_at)) {
+            return null;
         }
 
         return formatDate(this.dispatched_at, 'PP  HH:mm');
     }
 
     @computed('dispatched_at') get dispatchedAtShort() {
-        if (!this.dispatched_at) {
-            return 'N/A';
+        if (!isValidDate(this.dispatched_at)) {
+            return null;
         }
 
         return formatDate(this.dispatched_at, 'PP');
     }
 
     @computed('started_at') get startedAgo() {
-        if (!this.started_at) {
-            return 'N/A';
+        if (!isValidDate(this.started_at)) {
+            return null;
         }
 
         return formatDistanceToNow(this.started_at);
     }
 
     @computed('started_at') get startedAt() {
-        if (!this.started_at) {
-            return 'N/A';
+        if (!isValidDate(this.started_at)) {
+            return null;
         }
 
         return formatDate(this.started_at, 'PP HH:mm');
     }
 
     @computed('started_at') get startedAtShort() {
-        if (!this.started_at) {
-            return 'N/A';
+        if (!isValidDate(this.started_at)) {
+            return null;
         }
 
         return formatDate(this.started_at, 'PP');
     }
 
     @computed('scheduled_at') get scheduledAt() {
-        if (!this.scheduled_at || !isValidDate(this.scheduled_at)) {
-            return 'N/A';
+        if (!isValidDate(this.scheduled_at)) {
+            return null;
         }
 
         return formatDate(this.scheduled_at, 'PP HH:mm');
     }
 
     @computed('scheduled_at') get scheduledAtTime() {
-        if (!this.scheduled_at || !isValidDate(this.scheduled_at)) {
-            return 'N/A';
+        if (!isValidDate(this.scheduled_at)) {
+            return null;
         }
 
         return formatDate(this.scheduled_at, 'HH:mm');
-    }
-
-    @computed('created_at') get createdAtWithTime() {
-        return formatDate(this.created_at, 'PP HH:mm');
-    }
-
-    @computed('created_at') get createdAtDetailed() {
-        return formatDate(this.created_at, 'PP HH:mm');
     }
 
     // eslint-disable-next-line ember/use-brace-expansion
