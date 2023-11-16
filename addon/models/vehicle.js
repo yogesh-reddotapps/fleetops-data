@@ -40,7 +40,7 @@ export default class VehicleModel extends Model {
     @attr('string') plate_number;
     @attr('string') vin;
     @attr('raw') vin_data;
-    @attr('raw') model;
+    @attr('raw') model_data;
     @attr('raw') telematics;
     @attr('raw') meta;
     @attr('string') status;
