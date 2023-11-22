@@ -18,7 +18,7 @@ export default class EntityModel extends Model {
     /** @relationships */
     @belongsTo('payload') payload;
     @belongsTo('customer', { polymorphic: true, async: false }) customer;
-    @belongsTo('facilitator', { polymorphic: true, async: false }) facilitator;
+    @belongsTo('vendor', { polymorphic: true, async: false }) supplier;
     @belongsTo('driver') driver;
     @belongsTo('tracking-number') trackingNumber;
     @belongsTo('place') destination;
