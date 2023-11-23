@@ -10,6 +10,7 @@ export default class EntityModel extends Model {
     @attr('string') payload_uuid;
     @attr('string') company_uuid;
     @attr('string') customer_uuid;
+    @attr('string') supplier_uuid;
     @attr('string') driver_assigned_uuid;
     @attr('string') tracking_number_uuid;
     @attr('string') destination_uuid;
@@ -18,7 +19,7 @@ export default class EntityModel extends Model {
     /** @relationships */
     @belongsTo('payload') payload;
     @belongsTo('customer', { polymorphic: true, async: false }) customer;
-    @belongsTo('vendor', { polymorphic: true, async: false }) supplier;
+    @belongsTo('vendor') supplier;
     @belongsTo('driver') driver;
     @belongsTo('tracking-number') trackingNumber;
     @belongsTo('place') destination;
