@@ -24,6 +24,8 @@ export default class FleetModel extends Model {
     /** @attributes */
     @attr('number') drivers_count;
     @attr('number') drivers_online_count;
+    @attr('number') vehicles_count;
+    @attr('number') vehicles_online_count;
     @attr('string') photo_url;
     @attr('string') name;
     @attr('string') color;
