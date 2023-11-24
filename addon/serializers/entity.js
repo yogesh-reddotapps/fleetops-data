@@ -15,7 +15,7 @@ export default class EntitySerializer extends ApplicationSerializer.extend(Embed
             trackingNumber: { embedded: 'always' },
             driver: { embedded: 'always' },
             photo: { embedded: 'always' },
-            facilitator: { embedded: 'always' },
+            supplier: { embedded: 'always' },
             customer: { embedded: 'always' },
         };
     }
@@ -23,7 +23,7 @@ export default class EntitySerializer extends ApplicationSerializer.extend(Embed
     serializeBelongsTo(snapshot, json, relationship) {
         let key = relationship.key;
 
-        if (key === 'payload' || key === 'facilitator' || key === 'customer' || key === 'driver') {
+        if (key === 'payload' || key === 'supplier' || key === 'customer' || key === 'driver') {
             return;
         }
 
