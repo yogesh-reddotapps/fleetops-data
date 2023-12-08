@@ -1,5 +1,4 @@
 import GeoJson from './geo-json';
-import { assign } from '@ember/polyfills';
 import { isArray } from '@ember/array';
 
 export default class GeometryCollection extends GeoJson {
@@ -7,7 +6,7 @@ export default class GeometryCollection extends GeoJson {
         super();
 
         if (input && input.type === 'GeometryCollection' && input.geometries) {
-            assign(this, input);
+            Object.assign(this, input);
         } else if (isArray(input)) {
             this.geometries = input;
         } else if (input.coordinates && input.type) {
