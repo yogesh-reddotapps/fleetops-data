@@ -63,4 +63,11 @@ export default class TrackingStatusModel extends Model {
         }
         return formatDate(this.created_at, 'PP');
     }
+
+    @computed('created_at') get createdAtShortWithTime() {
+        if (!isValidDate(this.created_at)) {
+            return null;
+        }
+        return formatDate(this.created_at, 'PP p');
+    }
 }
