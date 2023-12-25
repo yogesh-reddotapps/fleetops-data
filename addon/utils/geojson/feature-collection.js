@@ -1,6 +1,5 @@
 import GeoJson from './geo-json';
 import Feature from './feature';
-import { assign } from '@ember/polyfills';
 import { isArray } from '@ember/array';
 
 export default class FeatureCollection extends GeoJson {
@@ -8,7 +7,7 @@ export default class FeatureCollection extends GeoJson {
         super();
 
         if (input && input.type === 'FeatureCollection' && input.features) {
-            assign(this, input);
+            Object.assign(this, input);
         } else if (isArray(input)) {
             this.features = input;
         } else {

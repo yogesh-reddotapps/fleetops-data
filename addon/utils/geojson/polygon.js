@@ -1,6 +1,5 @@
 import GeoJson from './geo-json';
 import closedPolygon from './closed-polygon';
-import { assign } from '@ember/polyfills';
 import { isArray } from '@ember/array';
 
 export default class Polygon extends GeoJson {
@@ -8,7 +7,7 @@ export default class Polygon extends GeoJson {
         super();
 
         if (input && input.type === 'Polygon' && input.coordinates) {
-            assign(this, input);
+            Object.assign(this, input);
         } else if (isArray(input)) {
             this.coordinates = input;
         } else {

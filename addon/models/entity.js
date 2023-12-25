@@ -53,11 +53,9 @@ export default class EntityModel extends Model {
     })
     dimensions_unit;
     @attr('string') declared_value;
-    @attr('string') tracking;
     @attr('string') sku;
     @attr('string') price;
     @attr('string') sale_price;
-    @attr('string') _import_id;
     @attr('string') slug;
     @attr('raw') meta;
 

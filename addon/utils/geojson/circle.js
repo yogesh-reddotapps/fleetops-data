@@ -1,7 +1,6 @@
 import GeoJson, { EarthRadius, MercatorCRS, DegreesPerRadian, RadiansPerDegree } from './geo-json';
 import Feature from './feature';
 import closedPolygon from './closed-polygon';
-import { assign } from '@ember/polyfills';
 
 function radToDeg(rad) {
     return rad * DegreesPerRadian;
@@ -78,7 +77,7 @@ export default class Circle extends GeoJson {
             throw new Error('GeoJSON: missing parameter for new Circle');
         }
 
-        assign(
+        Object.assign(
             this,
             new Feature({
                 type: 'Feature',
