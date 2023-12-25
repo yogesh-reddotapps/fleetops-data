@@ -42,12 +42,12 @@
     "ember-cli-htmlbars": "^6.3.0"
   },
   "devDependencies": {
+    "@fleetbase/ember-core": "^0.1.9",
     "@babel/eslint-parser": "^7.22.15",
     "@babel/plugin-proposal-decorators": "^7.23.2",
     "@ember/optional-features": "^2.0.0",
     "@ember/test-helpers": "^3.2.0",
     "@embroider/test-setup": "^3.0.2",
-    "@fleetbase/ember-core": "link:../ember-core",
     "@glimmer/component": "^1.1.2",
     "@glimmer/tracking": "^1.1.2",
     "broccoli-asset-rev": "^3.0.0",
