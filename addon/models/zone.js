@@ -20,7 +20,7 @@ export default class ZoneModel extends Model {
     @attr('string') stroke_color;
     @attr('string') status;
     @attr('polygon') border;
-    @attr('array') coordinates;
+    @attr('point') center;
 
     /** @dates */
     @attr('date') deleted_at;
@@ -28,6 +28,25 @@ export default class ZoneModel extends Model {
     @attr('date') updated_at;
 
     /** @computed */
+    @computed('border.coordinates', 'isNew') get locations() {
+        let coordinates = getWithDefault(this.border, 'coordinates', []);
+        let isCoordinatesWrapped = isArray(coordinates) && isArray(coordinates[0]) && coordinates[0].length > 2;
+        // hotfix patch when coordinates are wrapped in array
+        if (isCoordinatesWrapped) {
+            coordinates = first(coordinates);
+        }
+
+        if (this.isNew) {
+            return coordinates;
+        }
+
+        return coordinates.map((coord) => {
+            let [longitude, latitude] = coord;
+
+            return [latitude, longitude];
+        });
+    }
+    
     @computed('updated_at') get updatedAgo() {
         if (!isValidDate(this.updated_at)) {
             return null;
@@ -68,33 +87,5 @@ export default class ZoneModel extends Model {
             return null;
         }
         return formatDate(this.created_at, 'PP');
-    }
-
-    @computed('border.coordinates', 'isNew') get locations() {
-        let coordinates = getWithDefault(this.border, 'coordinates', []);
-
-        // hotfix patch when coordinates are wrapped in array
-        if (isArray(coordinates) && isArray(coordinates[0]) && coordinates[0].length > 2) {
-            coordinates = first(coordinates);
-        }
-
-        if (this.isNew) {
-            return coordinates;
-        }
-
-        return coordinates.map((coord) => coord.reverse());
-    }
-
-    @computed('bounds') get firstCoordinatePair() {
-        return first(this.bounds) ?? [0, 0];
-    }
-
-    @computed('locations') get centerCoordinates() {
-        const x = this.locations.map((xy) => xy[0]);
-        const y = this.locations.map((xy) => xy[1]);
-        const cx = (Math.min(...x) + Math.max(...x)) / 2;
-        const cy = (Math.min(...y) + Math.max(...y)) / 2;
-
-        return [cx, cy];
     }
 }
