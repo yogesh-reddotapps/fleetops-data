@@ -4,7 +4,6 @@ import { computed, get } from '@ember/object';
 import { not } from '@ember/object/computed';
 import { format as formatDate, isValid as isValidDate, formatDistanceToNow } from 'date-fns';
 import isValidCoordinates from '@fleetbase/ember-core/utils/is-valid-coordinates';
-import extractCoordinates from '@fleetbase/ember-core/utils/extract-coordinates';
 
 export default class PlaceModel extends Model {
     /** @ids */
@@ -83,19 +82,6 @@ export default class PlaceModel extends Model {
     @computed('latitude', 'longitude') get coordinates() {
         // eslint-disable-next-line ember/no-get
         return [get(this, 'latitude'), get(this, 'longitude')];
-    }
-
-    @computed('coordinates') get extractedCoordinates() {
-        return extractCoordinates(this.coordinates);
-    }
-
-    @computed('extractedCoordinates') get extractedLatLng() {
-        const [latitude, longitude] = this.extractedCoordinates;
-
-        return {
-            lat: latitude,
-            lng: longitude,
-        };
     }
 
     @computed('latitude', 'longitude') get latlng() {

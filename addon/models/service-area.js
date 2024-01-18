@@ -1,7 +1,6 @@
 import Model, { attr, hasMany } from '@ember-data/model';
 import { computed } from '@ember/object';
 import { format as formatDate, isValid as isValidDate, formatDistanceToNow } from 'date-fns';
-import extractCoordinates from '@fleetbase/ember-core/utils/extract-coordinates';
 import getWithDefault from '@fleetbase/ember-core/utils/get-with-default';
 import first from '@fleetbase/ember-core/utils/first';
 
@@ -22,6 +21,7 @@ export default class ServiceAreaModel extends Model {
     @attr('string') stroke_color;
     @attr('string') status;
     @attr('multi-polygon') border;
+    @attr('point') center;
 
     /** @dates */
     @attr('date') deleted_at;
@@ -34,24 +34,15 @@ export default class ServiceAreaModel extends Model {
         const coordinates = getWithDefault(polygon, 'coordinates', []);
         const bounds = first(coordinates);
 
-        return bounds.map((coord) => extractCoordinates(coord));
+        return bounds.map((coord) => {
+            let [longitude, latitude] = coord;
+
+            return [latitude, longitude];
+        });
     }
 
     @computed('border.coordinates.[]') get boundaries() {
         return getWithDefault(this.border, 'coordinates', []);
-    }
-
-    @computed('bounds') get firstCoordinatePair() {
-        return first(this.bounds) ?? [0, 0];
-    }
-
-    @computed('bounds') get centerCoordinates() {
-        const x = this.bounds.map((xy) => xy[0]);
-        const y = this.bounds.map((xy) => xy[1]);
-        const cx = (Math.min(...x) + Math.max(...x)) / 2;
-        const cy = (Math.min(...y) + Math.max(...y)) / 2;
-
-        return [cx, cy];
     }
 
     @computed('updated_at') get updatedAgo() {
