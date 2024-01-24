@@ -35,6 +35,7 @@ export default class OrderModel extends Model {
     @belongsTo('payload', { async: false }) payload;
     @belongsTo('driver', { async: false, inverse: 'jobs' }) driver_assigned;
     @belongsTo('route', { async: false }) route;
+    @belongsTo('purchase-rate', { async: false }) purchase_rate;
     @belongsTo('tracking-number', { async: false }) tracking_number;
     @belongsTo('order-config', { async: false }) order_config;
     @hasMany('tracking-status', { async: false }) tracking_statuses;
