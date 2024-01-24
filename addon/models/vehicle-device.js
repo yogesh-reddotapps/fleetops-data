@@ -13,7 +13,6 @@ export default class VehicleDeviceModel extends Model {
     @attr('string') device_name;
     @attr('string') device_location;
     @attr('string') device_model;
-    @attr('string') device_location;
     @attr('string') manufacturer;
     @attr('string') serial_number;
     @attr('string') data_frequency;

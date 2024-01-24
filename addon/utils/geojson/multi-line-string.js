@@ -1,6 +1,5 @@
 import GeoJson from './geo-json';
 import LineString from './line-string';
-import { assign } from '@ember/polyfills';
 import { isArray } from '@ember/array';
 
 export default class MultiLineString extends GeoJson {
@@ -8,7 +7,7 @@ export default class MultiLineString extends GeoJson {
         super();
 
         if (input && input.type === 'MultiLineString' && input.coordinates) {
-            assign(this, input);
+            Object.assign(this, input);
         } else if (isArray(input)) {
             this.coordinates = input;
         } else {
