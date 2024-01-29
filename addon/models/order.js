@@ -89,9 +89,11 @@ export default class OrderModel extends Model {
     @notEmpty('customer_uuid') has_customer;
     @notEmpty('meta.integrated_vendor') isIntegratedVendorOrder;
     @notEmpty('tracking_number_uuid') has_tracking_number;
+    @notEmpty('purchase_rate_uuid') has_purchase_rate;
     @notEmpty('tracking_statuses') has_tracking_statuses;
     @notEmpty('payload_uuid') has_payload;
     @not('hasTrackingNumber') missing_tracking_number;
+    @not('hasPurchaseRate') missing_purchase_rate;
     @not('hasTrackingStatuses') missing_tracking_statuses;
     @not('hasPayload') missing_payload;
     @bool('dispatched') isDispatched;
@@ -441,6 +443,20 @@ export default class OrderModel extends Model {
         return store.findRecord(`customer-${this.customer_type}`, this.customer_uuid, options).then((customer) => {
             this.set('customer', customer);
             return customer;
+        });
+    }
+
+    async loadPurchaseRate(options = {}) {
+        const owner = getOwner(this);
+        const store = owner.lookup(`service:store`);
+
+        if (!this.purchase_rate_uuid || !isBlank(this.purchase_rate)) {
+            return;
+        }
+
+        return store.findRecord('purchase-rate', this.purchase_rate_uuid, options).then((purchaseRate) => {
+            this.set('purchase_rate', purchaseRate);
+            return purchaseRate;
         });
     }
 
