@@ -39,6 +39,7 @@ export default class OrderModel extends Model {
     @belongsTo('tracking-number', { async: false }) tracking_number;
     @belongsTo('order-config', { async: false }) order_config;
     @hasMany('tracking-status', { async: false }) tracking_statuses;
+    @hasMany('comment', { async: false }) comments;
 
     /** @aliases */
     @alias('driver_assigned') driver;
@@ -56,6 +57,7 @@ export default class OrderModel extends Model {
     @attr('string') created_by_name;
     @attr('string') updated_by_name;
     @attr('string') pod_method;
+    @attr('string') notes;
     @attr('string') type;
     @attr('string') status;
     @attr('number') adhoc_distance;
@@ -410,7 +412,7 @@ export default class OrderModel extends Model {
 
     async loadPayload(options = {}) {
         const owner = getOwner(this);
-        const store = owner.lookup(`service:store`);
+        const store = owner.lookup('service:store');
 
         if (!this.payload_uuid || !isBlank(this.payload)) {
             return;
@@ -434,7 +436,7 @@ export default class OrderModel extends Model {
 
     async loadCustomer(options = {}) {
         const owner = getOwner(this);
-        const store = owner.lookup(`service:store`);
+        const store = owner.lookup('service:store');
 
         if (!this.customer_uuid || !isBlank(this.customer)) {
             return;
@@ -448,7 +450,7 @@ export default class OrderModel extends Model {
 
     async loadPurchaseRate(options = {}) {
         const owner = getOwner(this);
-        const store = owner.lookup(`service:store`);
+        const store = owner.lookup('service:store');
 
         if (!this.purchase_rate_uuid || !isBlank(this.purchase_rate)) {
             return;
@@ -462,7 +464,7 @@ export default class OrderModel extends Model {
 
     async loadOrderConfig(options = {}) {
         const owner = getOwner(this);
-        const fetch = owner.lookup(`service:fetch`);
+        const fetch = owner.lookup('service:fetch');
 
         if (!isBlank(this.order_config)) {
             return;
@@ -478,7 +480,7 @@ export default class OrderModel extends Model {
 
     async loadDriver(options = {}) {
         const owner = getOwner(this);
-        const store = owner.lookup(`service:store`);
+        const store = owner.lookup('service:store');
 
         if (!this.driver_assigned_uuid || !isBlank(this.driver_assigned)) {
             return;
@@ -492,7 +494,7 @@ export default class OrderModel extends Model {
 
     async loadTrackingNumber(options = {}) {
         const owner = getOwner(this);
-        const store = owner.lookup(`service:store`);
+        const store = owner.lookup('service:store');
 
         if (!this.tracking_number_uuid || !isBlank(this.tracking_number)) {
             return;
@@ -506,7 +508,7 @@ export default class OrderModel extends Model {
 
     async loadTrackingActivity(options = {}) {
         const owner = getOwner(this);
-        const store = owner.lookup(`service:store`);
+        const store = owner.lookup('service:store');
 
         if (!this.tracking_number_uuid) {
             return;
@@ -523,6 +525,24 @@ export default class OrderModel extends Model {
             .then((activity) => {
                 this.set('tracking_statuses', activity.toArray());
                 return activity;
+            });
+    }
+
+    async loadComments(options = {}) {
+        const owner = getOwner(this);
+        const store = owner.lookup('service:store');
+
+        return store
+            .query(
+                'comment',
+                {
+                    subject_uuid: this.id,
+                },
+                options
+            )
+            .then((comments) => {
+                this.set('comments', comments);
+                return comments;
             });
     }
 }

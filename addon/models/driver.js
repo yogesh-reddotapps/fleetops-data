@@ -195,7 +195,7 @@ export default class DriverModel extends Model {
 
     loadVendor() {
         const owner = getOwner(this);
-        const store = owner.lookup(`service:store`);
+        const store = owner.lookup('service:store');
 
         return new Promise((resolve, reject) => {
             if (isRelationMissing(this, 'vendor')) {
