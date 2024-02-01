@@ -19,6 +19,7 @@ export default class OrderSerializer extends ApplicationSerializer.extend(Embedd
             route: { embedded: 'always' },
             tracking_number: { embedded: 'always' },
             tracking_statuses: { embedded: 'always' },
+            comments: { embedded: 'always' },
         };
     }
 

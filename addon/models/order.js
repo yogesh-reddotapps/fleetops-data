@@ -537,6 +537,7 @@ export default class OrderModel extends Model {
                 'comment',
                 {
                     subject_uuid: this.id,
+                    sort: '-created_at'
                 },
                 options
             )
