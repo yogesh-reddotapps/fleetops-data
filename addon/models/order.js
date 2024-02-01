@@ -35,9 +35,12 @@ export default class OrderModel extends Model {
     @belongsTo('payload', { async: false }) payload;
     @belongsTo('driver', { async: false, inverse: 'jobs' }) driver_assigned;
     @belongsTo('route', { async: false }) route;
+    @belongsTo('purchase-rate', { async: false }) purchase_rate;
     @belongsTo('tracking-number', { async: false }) tracking_number;
     @belongsTo('order-config', { async: false }) order_config;
     @hasMany('tracking-status', { async: false }) tracking_statuses;
+    @hasMany('comment', { async: false }) comments;
+    @hasMany('file', { async: false }) files;
 
     /** @aliases */
     @alias('driver_assigned') driver;
@@ -55,6 +58,7 @@ export default class OrderModel extends Model {
     @attr('string') created_by_name;
     @attr('string') updated_by_name;
     @attr('string') pod_method;
+    @attr('string') notes;
     @attr('string') type;
     @attr('string') status;
     @attr('number') adhoc_distance;
@@ -88,9 +92,11 @@ export default class OrderModel extends Model {
     @notEmpty('customer_uuid') has_customer;
     @notEmpty('meta.integrated_vendor') isIntegratedVendorOrder;
     @notEmpty('tracking_number_uuid') has_tracking_number;
+    @notEmpty('purchase_rate_uuid') has_purchase_rate;
     @notEmpty('tracking_statuses') has_tracking_statuses;
     @notEmpty('payload_uuid') has_payload;
     @not('hasTrackingNumber') missing_tracking_number;
+    @not('hasPurchaseRate') missing_purchase_rate;
     @not('hasTrackingStatuses') missing_tracking_statuses;
     @not('hasPayload') missing_payload;
     @bool('dispatched') isDispatched;
@@ -407,7 +413,7 @@ export default class OrderModel extends Model {
 
     async loadPayload(options = {}) {
         const owner = getOwner(this);
-        const store = owner.lookup(`service:store`);
+        const store = owner.lookup('service:store');
 
         if (!this.payload_uuid || !isBlank(this.payload)) {
             return;
@@ -431,7 +437,7 @@ export default class OrderModel extends Model {
 
     async loadCustomer(options = {}) {
         const owner = getOwner(this);
-        const store = owner.lookup(`service:store`);
+        const store = owner.lookup('service:store');
 
         if (!this.customer_uuid || !isBlank(this.customer)) {
             return;
@@ -443,9 +449,23 @@ export default class OrderModel extends Model {
         });
     }
 
+    async loadPurchaseRate(options = {}) {
+        const owner = getOwner(this);
+        const store = owner.lookup('service:store');
+
+        if (!this.purchase_rate_uuid || !isBlank(this.purchase_rate)) {
+            return;
+        }
+
+        return store.findRecord('purchase-rate', this.purchase_rate_uuid, options).then((purchaseRate) => {
+            this.set('purchase_rate', purchaseRate);
+            return purchaseRate;
+        });
+    }
+
     async loadOrderConfig(options = {}) {
         const owner = getOwner(this);
-        const fetch = owner.lookup(`service:fetch`);
+        const fetch = owner.lookup('service:fetch');
 
         if (!isBlank(this.order_config)) {
             return;
@@ -461,7 +481,7 @@ export default class OrderModel extends Model {
 
     async loadDriver(options = {}) {
         const owner = getOwner(this);
-        const store = owner.lookup(`service:store`);
+        const store = owner.lookup('service:store');
 
         if (!this.driver_assigned_uuid || !isBlank(this.driver_assigned)) {
             return;
@@ -475,7 +495,7 @@ export default class OrderModel extends Model {
 
     async loadTrackingNumber(options = {}) {
         const owner = getOwner(this);
-        const store = owner.lookup(`service:store`);
+        const store = owner.lookup('service:store');
 
         if (!this.tracking_number_uuid || !isBlank(this.tracking_number)) {
             return;
@@ -489,7 +509,7 @@ export default class OrderModel extends Model {
 
     async loadTrackingActivity(options = {}) {
         const owner = getOwner(this);
-        const store = owner.lookup(`service:store`);
+        const store = owner.lookup('service:store');
 
         if (!this.tracking_number_uuid) {
             return;
@@ -506,6 +526,45 @@ export default class OrderModel extends Model {
             .then((activity) => {
                 this.set('tracking_statuses', activity.toArray());
                 return activity;
+            });
+    }
+
+    async loadComments(options = {}) {
+        const owner = getOwner(this);
+        const store = owner.lookup('service:store');
+
+        return store
+            .query(
+                'comment',
+                {
+                    subject_uuid: this.id,
+                    withoutParent: 1,
+                    sort: '-created_at',
+                },
+                options
+            )
+            .then((comments) => {
+                this.set('comments', comments);
+                return comments;
+            });
+    }
+
+    async loadFiles(options = {}) {
+        const owner = getOwner(this);
+        const store = owner.lookup('service:store');
+
+        return store
+            .query(
+                'file',
+                {
+                    subject_uuid: this.id,
+                    sort: '-created_at',
+                },
+                options
+            )
+            .then((files) => {
+                this.set('files', files);
+                return files;
             });
     }
 }

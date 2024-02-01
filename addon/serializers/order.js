@@ -15,9 +15,12 @@ export default class OrderSerializer extends ApplicationSerializer.extend(Embedd
             facilitator: { embedded: 'always' },
             customer: { embedded: 'always' },
             transaction: { embedded: 'always' },
+            purchase_rate: { embedded: 'always' },
             route: { embedded: 'always' },
             tracking_number: { embedded: 'always' },
             tracking_statuses: { embedded: 'always' },
+            files: { embedded: 'always' },
+            comments: { embedded: 'always' },
         };
     }
 

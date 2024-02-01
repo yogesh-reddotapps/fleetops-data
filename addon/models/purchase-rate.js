@@ -1,4 +1,4 @@
-import Model, { attr } from '@ember-data/model';
+import Model, { attr, belongsTo } from '@ember-data/model';
 import { computed } from '@ember/object';
 import { format as formatDate, isValid as isValidDate, formatDistanceToNow } from 'date-fns';
 
@@ -8,11 +8,19 @@ export default class PurchaseRateModel extends Model {
     @attr('string') company_uuid;
     @attr('string') service_quote_uuid;
     @attr('string') payload_uuid;
+    @attr('string') transaction_uuid;
+
+    /** @relationships */
+    @belongsTo('service-quote') service_quote;
 
     /** @dates */
     @attr('date') deleted_at;
     @attr('date') created_at;
     @attr('date') updated_at;
+
+    /** @attributes */
+    @attr('string') status;
+    @attr('raw') meta;
 
     /** @computed */
     @computed('updated_at') get updatedAgo() {

@@ -1,4 +1,4 @@
-import Model, { attr } from '@ember-data/model';
+import Model, { attr, hasMany } from '@ember-data/model';
 import { computed } from '@ember/object';
 import { format as formatDate, isValid as isValidDate, formatDistanceToNow } from 'date-fns';
 
@@ -7,6 +7,9 @@ export default class ServiceQuoteModel extends Model {
     @attr('string') request_id;
     @attr('string') service_rate_uuid;
     @attr('string') payload_uuid;
+
+    /** @relationships */
+    @hasMany('service-quote-item') items;
 
     /** @attributes */
     @attr('string') service_rate_name;

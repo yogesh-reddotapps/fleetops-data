@@ -102,7 +102,7 @@ export default class VehicleModel extends Model {
     /** @methods */
     loadDriver() {
         const owner = getOwner(this);
-        const store = owner.lookup(`service:store`);
+        const store = owner.lookup('service:store');
 
         return new Promise((resolve) => {
             if (isRelationMissing(this, 'driver')) {
@@ -123,7 +123,7 @@ export default class VehicleModel extends Model {
     }
     loadDevices() {
         const owner = getOwner(this);
-        const store = owner.lookup(`service:store`);
+        const store = owner.lookup('service:store');
 
         return new Promise((resolve, reject) => {
             return store
