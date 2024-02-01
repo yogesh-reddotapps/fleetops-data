@@ -46,7 +46,7 @@ export default class ZoneModel extends Model {
             return [latitude, longitude];
         });
     }
-    
+
     @computed('updated_at') get updatedAgo() {
         if (!isValidDate(this.updated_at)) {
             return null;

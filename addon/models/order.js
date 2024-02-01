@@ -539,7 +539,7 @@ export default class OrderModel extends Model {
                 {
                     subject_uuid: this.id,
                     withoutParent: 1,
-                    sort: '-created_at'
+                    sort: '-created_at',
                 },
                 options
             )
@@ -558,7 +558,7 @@ export default class OrderModel extends Model {
                 'file',
                 {
                     subject_uuid: this.id,
-                    sort: '-created_at'
+                    sort: '-created_at',
                 },
                 options
             )
