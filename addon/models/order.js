@@ -40,6 +40,7 @@ export default class OrderModel extends Model {
     @belongsTo('order-config', { async: false }) order_config;
     @hasMany('tracking-status', { async: false }) tracking_statuses;
     @hasMany('comment', { async: false }) comments;
+    @hasMany('file', { async: false }) files;
 
     /** @aliases */
     @alias('driver_assigned') driver;
@@ -537,6 +538,7 @@ export default class OrderModel extends Model {
                 'comment',
                 {
                     subject_uuid: this.id,
+                    withoutParent: 1,
                     sort: '-created_at'
                 },
                 options
@@ -544,6 +546,25 @@ export default class OrderModel extends Model {
             .then((comments) => {
                 this.set('comments', comments);
                 return comments;
+            });
+    }
+
+    async loadFiles(options = {}) {
+        const owner = getOwner(this);
+        const store = owner.lookup('service:store');
+
+        return store
+            .query(
+                'file',
+                {
+                    subject_uuid: this.id,
+                    sort: '-created_at'
+                },
+                options
+            )
+            .then((files) => {
+                this.set('files', files);
+                return files;
             });
     }
 }
