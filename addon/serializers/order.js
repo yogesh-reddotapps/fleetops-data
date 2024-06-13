@@ -12,6 +12,7 @@ export default class OrderSerializer extends ApplicationSerializer.extend(Embedd
         return {
             payload: { embedded: 'always' },
             driver_assigned: { embedded: 'always' },
+            quangtity: { embedded: 'always' },
             facilitator: { embedded: 'always' },
             customer: { embedded: 'always' },
             transaction: { embedded: 'always' },

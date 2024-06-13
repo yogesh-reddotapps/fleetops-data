@@ -10,6 +10,7 @@ export default class PayloadModel extends Model {
     @attr('string') pickup_uuid;
     @attr('string') dropoff_uuid;
     @attr('string') return_uuid;
+    @attr('string') quantity;
 
     /** @relationships */
     @belongsTo('place', { async: false }) pickup;
