@@ -1,1 +1,1 @@
-export { default } from '@fleetbase/fleetops-data/models/driver';
+export { default } from '@yogeshsahu/fleetops-data/models/driver';

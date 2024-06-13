@@ -1,1 +1,1 @@
-export { default } from '@fleetbase/fleetops-data/transforms/point';
+export { default } from '@yogeshsahu/fleetops-data/transforms/point';

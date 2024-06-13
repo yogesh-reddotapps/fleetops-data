@@ -6,6 +6,7 @@ export default class EntityModel extends Model {
     /** @ids */
     @attr('string') public_id;
     @attr('string') internal_id;
+    @attr('string') quantity;
     @attr('string') _import_id;
     @attr('string') payload_uuid;
     @attr('string') company_uuid;

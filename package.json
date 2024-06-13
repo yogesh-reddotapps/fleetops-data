@@ -1,6 +1,6 @@
 {
-  "name": "@fleetbase/fleetops-data",
-  "version": "0.1.8",
+  "name": "@yogeshsahu/fleetops-data",
+  "version": "1.0.1",
   "description": "Fleetbase Fleet-Ops based models, serializers, transforms, adapters and GeoJson utility functions.",
   "keywords": [
     "fleetbase-data",
@@ -10,7 +10,7 @@
     "ember-addon",
     "ember-engine"
   ],
-  "repository": "https://github.com/fleetbase/fleetops-data",
+  "repository": "https://github.com/yogesh-reddotapps/fleetops-data.git",
   "license": "MIT",
   "author": "Fleetbase Pte Ltd <hello@fleetbase.io>",
   "directories": {

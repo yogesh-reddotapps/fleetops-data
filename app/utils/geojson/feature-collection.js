@@ -1,1 +1,1 @@
-export { default } from '@fleetbase/fleetops-data/utils/geojson/feature-collection';
+export { default } from '@yogeshsahu/fleetops-data/utils/geojson/feature-collection';

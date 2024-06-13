@@ -13,6 +13,7 @@ export default class OrderModel extends Model {
     /** @ids */
     @attr('string') public_id;
     @attr('string') internal_id;
+    @attr('string') quantity;
     @attr('string') company_uuid;
     @attr('string') transaction_uuid;
     @attr('string') customer_uuid;
@@ -312,6 +313,7 @@ export default class OrderModel extends Model {
 
     /** @methods */
     setPayload(payload = null) {
+        console.log('setting payload', payload);
         if (isNotModel(payload)) {
             return this;
         }

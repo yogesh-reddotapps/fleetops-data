@@ -1,1 +1,1 @@
-export { default } from '@fleetbase/fleetops-data/models/fleet';
+export { default } from '@yogeshsahu/fleetops-data/models/fleet';

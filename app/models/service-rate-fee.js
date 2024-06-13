@@ -1,1 +1,1 @@
-export { default } from '@fleetbase/fleetops-data/models/service-rate-fee';
+export { default } from '@yogeshsahu/fleetops-data/models/service-rate-fee';

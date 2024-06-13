@@ -1,4 +1,4 @@
-# @fleetbase/fleetops-data
+# @yogeshsahu/fleetops-data
 
 [Short description of the addon.]
 
@@ -13,7 +13,7 @@
 ## Installation
 
 ```
-ember install @fleetbase/fleetops-data
+ember install @yogeshsahu/fleetops-data
 ```
 
 

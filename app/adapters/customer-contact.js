@@ -1,1 +1,1 @@
-export { default } from '@fleetbase/fleetops-data/adapters/customer-contact';
+export { default } from '@yogeshsahu/fleetops-data/adapters/customer-contact';

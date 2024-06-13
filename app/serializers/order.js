@@ -1,1 +1,1 @@
-export { default } from '@fleetbase/fleetops-data/serializers/order';
+export { default } from '@yogeshsahu/fleetops-data/serializers/order';

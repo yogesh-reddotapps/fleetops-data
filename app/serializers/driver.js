@@ -1,1 +1,1 @@
-export { default } from '@fleetbase/fleetops-data/serializers/driver';
+export { default } from '@yogeshsahu/fleetops-data/serializers/driver';
