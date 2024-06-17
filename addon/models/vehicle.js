@@ -27,6 +27,8 @@ export default class VehicleModel extends Model {
     @attr('string') driver_name;
     @attr('string') vendor_name;
     @attr('string') display_name;
+    @attr('string') gps;
+    @attr('string') erp;
     @attr('string', {
         defaultValue: get(config, 'defaultValues.vehicleAvatar'),
     })
